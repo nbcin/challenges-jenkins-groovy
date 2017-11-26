@@ -92,6 +92,7 @@ end
 # Install Jenkins pipeline plugins
 
 jenkins_pipeline_plugins = {
+  'GitHub' => '1.625.3',
   'Pipeline' => '2.5'
 }
 
@@ -101,3 +102,14 @@ jenkins_pipeline_plugins.each do |plugin|
     notifies :execute, 'jenkins_command[safe-restart]', :immediately
   end
 end
+
+# %w[CommonServerCheckRepo].each do |job_name|
+#   config = File.join(Chef::Config[:file_cache_path], "#{job_name}.xml")
+#   template config do
+#     source "#{job_name}/config.xml"
+#   end
+
+#   jenkins_job job_name do
+#     config config
+#   end
+# end
