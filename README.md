@@ -32,10 +32,22 @@ jenkins-groovy-study: Jenkins Case Study From Dummy To Pro
 ```
 - See more: [Scenario-101](./Scenario-101)
 
+## Scenario-102: Jenkins Groovy HelloWorld II
+- Objective: Advanced Usage of Jenkins Groovy
+- Requirements:
+```
+1. Define a Jenkins pipeline job automatically
+2. Define a Jenkins job via Jenkinsfile script automatically
+3. Use groovy to enable and configure ThinBackup plugin
+```
+- See more: [Scenario-102](./Scenario-102)
+
+TODO
+
 # Highlights
 - More Resources:
 ```
-https://github.com/chef-cookbooks/jenkins
+https://jenkins.io/doc/book/pipeline/jenkinsfile/
 https://github.com/jenkinsci/pipeline-examples
 ```
 
