@@ -11,7 +11,8 @@ Table of Contents
 
    * [jenkins-groovy-study](#jenkins-groovy-study)
    * [Scenarios](#scenarios)
-      * [Scenario-101: Jenkins HelloWorld I](#scenario-101-jenkins-helloworld-i)
+      * [Scenario-101: Jenkins Groovy HelloWorld I](#scenario-101-jenkins-groovy-helloworld-i)
+      * [Scenario-102: Jenkins Groovy HelloWorld II](#scenario-102-jenkins-groovy-helloworld-ii)
    * [Highlights](#highlights)
    * [Contributors: Give People Credits](#contributors-give-people-credits)
    * [License](#license)
