@@ -109,6 +109,7 @@ jenkins_pipeline_plugins = {
   'scm-api' => '2.2.5',
   'git' => '3.6.4',
   # Install pipeline plugin
+  'workflow-step-api' => '2.14',
   'workflow-support' => '2.16',
   'cloudbees-folder' => '6.2.1',
   'branch-api' => '2.0.15',
