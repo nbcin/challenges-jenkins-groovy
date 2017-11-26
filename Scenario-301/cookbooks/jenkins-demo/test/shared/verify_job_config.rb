@@ -51,9 +51,7 @@ jenkins_plugins_versions = {
 }
 # verify plugin version
 jenkins_plugins_versions.each do |plugin|
-  jenkins_plugin plugin[0] do
-    describe file("/var/lib/jenkins/plugins/#{plugin[0]}/META-INF/MANIFEST.MF") do
-      its(:content) { should contain "Plugin-Version: #{plugin[1]}" }
-    end
+  describe file("/var/lib/jenkins/plugins/#{plugin[0]}/META-INF/MANIFEST.MF") do
+    its(:content) { should contain "Plugin-Version: #{plugin[1]}" }
   end
 end
