@@ -8,16 +8,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-# -*- encoding: utf-8 -*-
-
-#
-# Cookbook Name:: jenkins-demo
-# Recipe:: conf_test_job
-#
-# Copyright 2017, DennyZhang.com
-#
-# All rights reserved - Do Not Redistribute
-#
 
 ################################################################################
 # Install simple jobs
@@ -142,3 +132,4 @@ end
   end
 end
 ################################################################################
+include_recipe 'jenkins-demo::test_pipeline'
