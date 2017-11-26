@@ -65,7 +65,6 @@ kitchen list
 kitchen verify
 kitchen destroy
 
-- TODO: how does the ssh key work? With which OS user, and where the key is?
 ```
 
 ## kitchen ec2 deployment
