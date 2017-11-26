@@ -129,15 +129,14 @@ jenkins_command 'safe-restart' do
   action :execute
 end
 
-# TODO
-# %w[JenkinsFileExample1 JenkinsFileExample2].each do |job_name|
-#   config = File.join(Chef::Config[:file_cache_path], "#{job_name}.xml")
-#   template config do
-#     source "#{job_name}/config.xml"
-#   end
+%w[JenkinsFileExample1 JenkinsFileExample2].each do |job_name|
+  config = File.join(Chef::Config[:file_cache_path], "#{job_name}.xml")
+  template config do
+    source "#{job_name}/config.xml"
+  end
 
-#   jenkins_job job_name do
-#     config config
-#   end
-# end
-# ################################################################################
+  jenkins_job job_name do
+    config config
+  end
+end
+################################################################################
