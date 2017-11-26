@@ -91,9 +91,14 @@ end
 ################################################################################
 # Install Jenkins pipeline plugins
 
+package 'git' do
+  action :install
+end
+
 jenkins_pipeline_plugins = {
-  'GitHub' => '1.625.3',
-  'Pipeline' => '2.5'
+  'Git' => '3.6.4'
+  # ,
+  # 'Pipeline' => '2.5'
 }
 
 jenkins_pipeline_plugins.each do |plugin|
@@ -103,13 +108,13 @@ jenkins_pipeline_plugins.each do |plugin|
   end
 end
 
-# %w[CommonServerCheckRepo].each do |job_name|
-#   config = File.join(Chef::Config[:file_cache_path], "#{job_name}.xml")
-#   template config do
-#     source "#{job_name}/config.xml"
-#   end
+%w[JenkinsFileExample1 JenkinsFileExample2].each do |job_name|
+  config = File.join(Chef::Config[:file_cache_path], "#{job_name}.xml")
+  template config do
+    source "#{job_name}/config.xml"
+  end
 
-#   jenkins_job job_name do
-#     config config
-#   end
-# end
+  jenkins_job job_name do
+    config config
+  end
+end
