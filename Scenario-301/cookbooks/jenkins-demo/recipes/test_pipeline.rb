@@ -16,20 +16,24 @@ package 'git' do
 end
 
 jenkins_pipeline_plugins = {
+  ############################################
   # Install git plugin
+  'git' => '3.6.4',
+  # upgrade or downgrade plugins
   'structs' => '1.10',
   'git-client' => '2.6.0',
   'scm-api' => '2.2.5',
-  'git' => '3.6.4',
+  ############################################
   # Install pipeline plugin
+  'workflow-aggregator' => '2.5',
+  # upgrade or downgrade plugins
   'workflow-step-api' => '2.14',
   'workflow-support' => '2.16',
   'branch-api' => '2.0.15',
   # Need to install branch-api, then cloudbees-folder
   # If not, branch-api:v2.0.15 will downgrade cloudbees-folder to v6.1.0
   'cloudbees-folder' => '6.2.1',
-  'workflow-cps' => '2.41',
-  'workflow-aggregator' => '2.5'
+  'workflow-cps' => '2.41'
 }
 
 jenkins_pipeline_plugins.each do |plugin|

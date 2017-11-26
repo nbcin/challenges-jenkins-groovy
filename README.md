@@ -93,8 +93,9 @@ TODO
 # Highlights
 - More Resources:
 ```
-https://jenkins.io/doc/book/pipeline/jenkinsfile/
+https://jenkins.io/doc/book/pipeline/jenkinsfile
 https://github.com/jenkinsci/pipeline-examples
+https://dzone.com/articles/jenkins-pipeline-plugin-tutorial
 ```
 
 # Contributors: Give People Credits
