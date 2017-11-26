@@ -90,5 +90,3 @@ jenkins_script 'all authenticated users admin access' do
   EOH
   # TODO: add not_if
 end
-
-# TODO: Chef keep as login users, after the authenticated
