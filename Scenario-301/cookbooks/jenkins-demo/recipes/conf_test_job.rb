@@ -96,6 +96,7 @@ package 'git' do
 end
 
 jenkins_pipeline_plugins = {
+  'workflow-scm-step' => '2.6',
   'ssh-credentials' => '1.13',
   'structs' => '1.9',
   'git' => '3.6.4'
