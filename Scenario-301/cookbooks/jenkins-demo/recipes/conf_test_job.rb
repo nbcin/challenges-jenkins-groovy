@@ -103,7 +103,7 @@ jenkins_pipeline_plugins = {
   'structs' => '1.10',
   'git' => '3.6.4',
   # Install pipeline plugin
-  # 'Pipeline' => '2.5'
+  'workflow-aggregator' => '2.5'
 }
 
 jenkins_pipeline_plugins.each do |plugin|
