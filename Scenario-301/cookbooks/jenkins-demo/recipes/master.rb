@@ -53,5 +53,10 @@ end
   end
 end
 
-include_recipe 'jenkins-demo::security'
+if node['jenkins_demo']['enable_test'] == '1'
+  include_recipe 'jenkins-demo::conf_test_job'
+end
+
 include_recipe 'jenkins-demo::backup'
+
+include_recipe 'jenkins-demo::security'
