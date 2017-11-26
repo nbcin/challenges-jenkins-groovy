@@ -41,7 +41,7 @@ end
 
 # verify plugin version
 describe file('/var/lib/jenkins/plugins/workflow-cps/META-INF/MANIFEST.MF') do
-  its(:content) { should contain 'Plugin-Version: 2.24' }
+  its(:content) { should contain 'Plugin-Version: 2.41' }
 end
 
 describe file('/var/lib/jenkins/plugins/git/META-INF/MANIFEST.MF') do
