@@ -92,7 +92,7 @@ end
 # Install Jenkins pipeline plugins
 
 jenkins_pipeline_plugins = {
-  'pipeline' => '2.5'
+  'Pipeline' => '2.5'
 }
 
 jenkins_pipeline_plugins.each do |plugin|
