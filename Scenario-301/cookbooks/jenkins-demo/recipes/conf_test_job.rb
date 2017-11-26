@@ -109,7 +109,7 @@ jenkins_pipeline_plugins = {
 jenkins_pipeline_plugins.each do |plugin|
   jenkins_plugin plugin[0] do
     version plugin[1]
-    notifies :execute, 'jenkins_command[safe-restart]', :immediately
+    notifies :execute, 'jenkins_command[safe-restart]', :delayed
   end
 end
 
