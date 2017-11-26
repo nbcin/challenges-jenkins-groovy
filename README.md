@@ -14,7 +14,9 @@ Table of Contents
       * [Scenario-101: Jenkins Groovy For Security I](#scenario-101-jenkins-groovy-for-security-i)
       * [Scenario-102: Jenkins Groovy For Security II](#scenario-102-jenkins-groovy-for-security-ii)
       * [Scenario-201: Jenkins Backup I](#scenario-201-jenkins-backup-i)
+      * [Scenario-202: Jenkins Backup II](#scenario-202-jenkins-backup-ii)
       * [Scenario-301: Jenkins Pipeline I](#scenario-301-jenkins-pipeline-i)
+      * [Scenario-302: Jenkins Pipeline II](#scenario-302-jenkins-pipeline-ii)
    * [Highlights](#highlights)
    * [Contributors: Give People Credits](#contributors-give-people-credits)
    * [License](#license)
@@ -54,6 +56,16 @@ Table of Contents
 
 TODO
 
+## Scenario-202: Jenkins Backup II
+- Objective: Support 2 way sync
+- Requirements:
+```
+1. Users may configure Jenkins in GUI. Change may make in git repo. Thus support 2 way sync
+```
+- See more: [Scenario-202](./Scenario-202)
+
+TODO
+
 ## Scenario-301: Jenkins Pipeline I
 - Objective: Basic Usage of Jenkins Pipeline
 - Requirements:
@@ -62,6 +74,15 @@ TODO
 2. Define a Jenkins job via Jenkinsfile script automatically
 ```
 - See more: [Scenario-301](./Scenario-301)
+- TODO
+
+## Scenario-302: Jenkins Pipeline II
+- Objective: More Pipeline Usage
+- Requirements:
+```
+1. Define a heavy-weight Jenkins pipeline job. It's supposed to across 2 Jenkins agent nodes
+```
+- See more: [Scenario-302](./Scenario-302)
 - TODO
 
 # Highlights
