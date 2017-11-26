@@ -96,6 +96,8 @@ package 'git' do
 end
 
 jenkins_pipeline_plugins = {
+  'ssh-credentials' => '1.13',
+  'structs' => '1.9',
   'git' => '3.6.4'
   # ,
   # 'Pipeline' => '2.5'
