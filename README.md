@@ -22,12 +22,13 @@ jenkins-groovy-study: Jenkins Case Study From Dummy To Pro
 
 # Scenarios
 
-## Scenario-101: Jenkins HelloWorld I
+## Scenario-101: Jenkins Groovy HelloWorld I
 - Objective: Basic usage for configuring Jenkins in Groovy
 - Requirements:
 ```
-1. For better security, only registered user can login
-2. For better security, Jenkins listen on port 18080, instead of 8080
+1. Use groovy to add a test user
+2. For better security, only registered user can login
+3. For better security, Jenkins listen on port 18080, instead of 8080
 ```
 - See more: [Scenario-101](./Scenario-101)
 
