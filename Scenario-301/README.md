@@ -15,8 +15,8 @@ Table of Contents
 
 # Requirement
 
-1. Define a Jenkins pipeline job automatically
-2. Define a Jenkins job via Jenkinsfile script automatically
+1. Define a dummy Jenkins pipeline job using Jenkinsfile
+2. Define a Jenkins parameterized pipeline job using Jenkinsfile. It shall trigger another job.
 
 Quiz: 
 - Once I have enabled Jenkins security, how my chef update will work?

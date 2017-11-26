@@ -70,8 +70,8 @@ TODO
 - Objective: Basic Usage of Jenkins Pipeline
 - Requirements:
 ```
-1. Define a Jenkins pipeline job automatically
-2. Define a Jenkins job via Jenkinsfile script automatically
+1. Define a dummy Jenkins pipeline job using Jenkinsfile
+2. Define a Jenkins parameterized pipeline job using Jenkinsfile. It shall trigger another job.
 ```
 - See more: [Scenario-301](./Scenario-301)
 - TODO
