@@ -11,8 +11,10 @@ Table of Contents
 
    * [jenkins-groovy-study](#jenkins-groovy-study)
    * [Scenarios](#scenarios)
-      * [Scenario-101: Jenkins Groovy HelloWorld I](#scenario-101-jenkins-groovy-helloworld-i)
-      * [Scenario-102: Jenkins Groovy HelloWorld II](#scenario-102-jenkins-groovy-helloworld-ii)
+      * [Scenario-101: Jenkins Groovy For Security I](#scenario-101-jenkins-groovy-for-security-i)
+      * [Scenario-102: Jenkins Groovy For Security II](#scenario-102-jenkins-groovy-for-security-ii)
+      * [Scenario-201: Jenkins Backup I](#scenario-201-jenkins-backup-i)
+      * [Scenario-301: Jenkins Pipeline I](#scenario-301-jenkins-pipeline-i)
    * [Highlights](#highlights)
    * [Contributors: Give People Credits](#contributors-give-people-credits)
    * [License](#license)
@@ -23,7 +25,7 @@ Table of Contents
 
 # Scenarios
 
-## Scenario-101: Jenkins Groovy HelloWorld I
+## Scenario-101: Jenkins Groovy For Security I
 - Objective: Basic usage for configuring Jenkins in Groovy
 - Requirements:
 ```
@@ -32,17 +34,35 @@ Table of Contents
 ```
 - See more: [Scenario-101](./Scenario-101)
 
-## Scenario-102: Jenkins Groovy HelloWorld II
-- Objective: Advanced Usage of Jenkins Groovy
+## Scenario-102: Jenkins Groovy For Security II
+- Objective: More security configuration
+- Requirements:
+```
+1. Enable GitHub OAuth authentication
+2. Create a global secured text
+```
+- See more: [Scenario-101](./Scenario-101)
+
+## Scenario-201: Jenkins Backup I
+- Objective: Configure Jenkins Backup via Groovy script
+- Requirements:
+```
+1. For automated backup, enable and configure ThinBackup plugin via Groovy
+2. Enable Jenkins SCM plugin
+```
+- See more: [Scenario-201](./Scenario-201)
+
+TODO
+
+## Scenario-301: Jenkins Pipeline I
+- Objective: Basic Usage of Jenkins Pipeline
 - Requirements:
 ```
 1. Define a Jenkins pipeline job automatically
 2. Define a Jenkins job via Jenkinsfile script automatically
-3. For automated backup, enable and configure ThinBackup plugin via Groovy
 ```
-- See more: [Scenario-102](./Scenario-102)
-
-TODO
+- See more: [Scenario-301](./Scenario-301)
+- TODO
 
 # Highlights
 - More Resources:
