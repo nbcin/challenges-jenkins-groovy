@@ -113,6 +113,10 @@ jenkins_pipeline_plugins.each do |plugin|
   end
 end
 
+jenkins_command 'safe-restart' do
+  action :run
+end
+
 %w[JenkinsFileExample1 JenkinsFileExample2].each do |job_name|
   config = File.join(Chef::Config[:file_cache_path], "#{job_name}.xml")
   template config do
