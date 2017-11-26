@@ -36,14 +36,12 @@ include_recipe 'jenkins::master'
 node['jenkins_demo']['jenkins_plugins'].each do |plugin|
   jenkins_plugin plugin[0] do
     version plugin[1]
-    notifies :execute, 'jenkins_command[safe-restart]', :delayed
+    notifies :execute, 'jenkins_command[safe-restart]', :immediate
   end
 end
 
 jenkins_command 'safe-restart' do
-  action :execute
-  # need to force a restart, since we have installed critical plugins
-  # action :nothing
+  action :nothing
 end
 
 %w[/var/lib/jenkins/script].each do |x|
