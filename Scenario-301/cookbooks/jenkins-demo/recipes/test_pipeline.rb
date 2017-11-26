@@ -28,12 +28,12 @@ jenkins_pipeline_plugins = {
   'workflow-aggregator' => '2.5',
   # upgrade or downgrade plugins
   'workflow-step-api' => '2.14',
-  'workflow-support' => '2.16',
   'branch-api' => '2.0.15',
   # Need to install branch-api, then cloudbees-folder
   # If not, branch-api:v2.0.15 will downgrade cloudbees-folder to v6.1.0
   'cloudbees-folder' => '6.2.1',
-  'workflow-cps' => '2.41'
+  'workflow-cps' => '2.41',
+  'workflow-support' => '2.16'
 }
 
 jenkins_pipeline_plugins.each do |plugin|
