@@ -15,7 +15,7 @@ Table of Contents
 
 # Requirement
 
-1. Use groovy to add a test user
+1. Use groovy to add a test user in Jenkins
 2. For better security, only registered user can login
 3. For better security, Jenkins listen on port 18080, instead of 8080
 

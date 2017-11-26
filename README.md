@@ -17,7 +17,7 @@ Table of Contents
    * [Contributors: Give People Credits](#contributors-give-people-credits)
    * [License](#license)
 
-jenkins-groovy-study: Jenkins Case Study From Dummy To Pro
+**jenkins-groovy-study**: Use groovy, Jenkinsfile, Pipeline in Jenkins as a Pro.
 
 <a href="https://www.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/dns_small.png"></a>
 
@@ -27,7 +27,7 @@ jenkins-groovy-study: Jenkins Case Study From Dummy To Pro
 - Objective: Basic usage for configuring Jenkins in Groovy
 - Requirements:
 ```
-1. Use groovy to add a test user
+1. Use groovy to add a test user in Jenkins
 2. For better security, only registered user can login
 3. For better security, Jenkins listen on port 18080, instead of 8080
 ```
