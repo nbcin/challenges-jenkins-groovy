@@ -6,9 +6,10 @@ node {
         stage('Test') {
             build job: "CommonServerCheckRepo"
         }
-        stage('Deploy') {
-            echo 'Deploying....'
-        }
+        if (whether_skip_deploy == false) {
+            stage('Deploy') {
+                echo 'Deploying....'
+           }
     }
     finally {
         echo "Finally Actions"

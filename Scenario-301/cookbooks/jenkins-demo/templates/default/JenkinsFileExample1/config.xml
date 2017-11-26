@@ -25,7 +25,7 @@
       <submoduleCfg class="list"/>
       <extensions/>
     </scm>
-    <scriptPath>Scenario-301/cookbooks/jenkins-demo/templates/default/JenkinsFileExample1/Jenkinsfile</scriptPath>
+    <scriptPath>Scenario-301/cookbooks/jenkins-demo/templates/default/JenkinsFileExample1/Jenkinsfile.groovy</scriptPath>
     <lightweight>true</lightweight>
   </definition>
   <triggers/>

@@ -4,6 +4,15 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.BooleanParameterDefinition>
+          <name>whether_skip_deploy</name>
+          <description>If checked, deploy stage will be skipped</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
       <triggers/>
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
@@ -25,7 +34,7 @@
       <submoduleCfg class="list"/>
       <extensions/>
     </scm>
-    <scriptPath>Scenario-301/cookbooks/jenkins-demo/templates/default/JenkinsFileExample2/Jenkinsfile</scriptPath>
+    <scriptPath>Scenario-301/cookbooks/jenkins-demo/templates/default/JenkinsFileExample2/Jenkinsfile.groovy</scriptPath>
     <lightweight>true</lightweight>
   </definition>
   <triggers/>
