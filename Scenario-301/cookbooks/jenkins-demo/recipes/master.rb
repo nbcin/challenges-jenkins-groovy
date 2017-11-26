@@ -15,6 +15,8 @@ node.default['java']['install_flavor'] = 'oracle'
 node.default['java']['jdk_version'] = '8'
 node.default['java']['set_etc_environment'] = true
 node.default['java']['oracle']['accept_oracle_download_terms'] = true
+# Avoid unecessary change to /etc/sysconfig/jenkins in CentOS
+node.default['jenkins']['java'] = 'java'
 
 if %w[debian ubuntu].include?(node['platform_family'])
   node.default['jenkins']['master']['repository'] = \
@@ -41,6 +43,7 @@ node['jenkins_demo']['jenkins_plugins'].each do |plugin|
 end
 
 # force restart, since critical jenkins plugin installed
+# TODO: When re-run chef update, avoid this extra blind jenkins restart
 jenkins_command 'safe-restart' do
   action :execute
 end
