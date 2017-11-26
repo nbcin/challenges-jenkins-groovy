@@ -16,7 +16,7 @@ default['jenkins_demo']['jenkins_plugins'] = {
   'plain-credentials' => '1.4',
   'slack' => '2.3',
   'script-security' => '1.35',
-  'matrix-auth' => '2.1.1'
+  'matrix-auth' => '2.2'
 }
 
 ########################################
@@ -61,5 +61,3 @@ default['jenkins_demo']['chef_public_key'] = \
   'thhOomkzspQAv17Z1gyOSPcd7uCIzi6I+0BCcxhyzJ682CkzS4qenr6k/NMxKRI'\
   '2ne4grppDiVHzSUR+rx9HCrOwi4l1FP/6Iml3pcXz4ZLI63+0SHVE+IQqIYcumZ'\
   'kZ chef@mytest.com'
-
-default['jenkins_demo']['enable_test'] = '1'

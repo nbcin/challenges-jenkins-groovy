@@ -109,12 +109,13 @@ jenkins_pipeline_plugins = {
 jenkins_pipeline_plugins.each do |plugin|
   jenkins_plugin plugin[0] do
     version plugin[1]
-    notifies :execute, 'jenkins_command[safe-restart]', :immediately
+    notifies :execute, 'jenkins_command[safe-restart]', :delayed
   end
 end
 
+# force restart, since critical jenkins plugin installed
 jenkins_command 'safe-restart' do
-  action :nothing
+  action :execute
 end
 
 %w[JenkinsFileExample1 JenkinsFileExample2].each do |job_name|
@@ -127,3 +128,4 @@ end
     config config
   end
 end
+################################################################################

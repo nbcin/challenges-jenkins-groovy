@@ -36,12 +36,13 @@ include_recipe 'jenkins::master'
 node['jenkins_demo']['jenkins_plugins'].each do |plugin|
   jenkins_plugin plugin[0] do
     version plugin[1]
-    notifies :execute, 'jenkins_command[safe-restart]', :immediately
+    notifies :execute, 'jenkins_command[safe-restart]', :delayed
   end
 end
 
+# force restart, since critical jenkins plugin installed
 jenkins_command 'safe-restart' do
-  action :nothing
+  action :execute
 end
 
 %w[/var/lib/jenkins/script].each do |x|
@@ -53,10 +54,5 @@ end
   end
 end
 
-if node['jenkins_demo']['enable_test'] == '1'
-  include_recipe 'jenkins-demo::conf_test_job'
-end
-
 include_recipe 'jenkins-demo::backup'
-
 include_recipe 'jenkins-demo::security'
