@@ -44,7 +44,7 @@ bundle install
 - Run kitchen test
 ```
 # https://github.com/test-kitchen/kitchen-docker
-kitchen converge
+time kitchen converge
 kitchen list
 kitchen verify
 kitchen destroy
@@ -60,7 +60,7 @@ export KITCHEN_YAML=".kitchen_digitalocean.yml"
 export DIGITALOCEAN_ACCESS_TOKEN="1234"
 export DIGITALOCEAN_SSH_KEY_IDS="1234, 5678"
 
-kitchen converge
+time kitchen converge
 kitchen list
 kitchen verify
 kitchen destroy
@@ -99,7 +99,7 @@ export AWS_SSH_KEY_ID="$KEY_USER"
 # Update bundle: https://github.com/chef/chef-provisioning/issues/151
 bundle update
 
-kitchen converge
+time kitchen converge
 kitchen list
 kitchen verify
 kitchen destroy
@@ -113,7 +113,7 @@ export KITCHEN_YAML=".kitchen_vagrant.yml"
 
 bundle install
 
-kitchen converge
+time kitchen converge
 kitchen list
 kitchen verify
 kitchen destroy
