@@ -51,3 +51,7 @@ end
 describe file('/var/lib/jenkins/plugins/workflow-job/META-INF/MANIFEST.MF') do
   its(:content) { should contain 'Plugin-Version: 2.9' }
 end
+
+describe file('/var/lib/jenkins/plugins/workflow-support/META-INF/MANIFEST.MF') do
+  its(:content) { should contain 'Plugin-Version: 2.16' }
+end
