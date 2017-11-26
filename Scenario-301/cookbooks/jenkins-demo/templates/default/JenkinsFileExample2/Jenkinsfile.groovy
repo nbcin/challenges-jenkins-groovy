@@ -10,6 +10,7 @@ node {
             stage('Deploy') {
                 echo 'Deploying....'
            }
+        }
     }
     finally {
         echo "Finally Actions"
