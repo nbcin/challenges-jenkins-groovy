@@ -25,7 +25,7 @@ if %w[debian ubuntu].include?(node['platform_family'])
     'http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key'
 end
 
-node.default['jenkins']['executor']['timeout'] = 360
+node.default['jenkins']['executor']['timeout'] = 480
 
 node.default['jenkins']['master']['port'] = node['jenkins_demo']['jenkins_port']
 node.default['jenkins']['master']['endpoint'] = \
