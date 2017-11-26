@@ -17,7 +17,7 @@ Table of Contents
 
 1. Define a Jenkins pipeline job automatically
 2. Define a Jenkins job via Jenkinsfile script automatically
-3. Use groovy to enable and configure ThinBackup plugin
+3. For automated backup, enable and configure ThinBackup plugin via Groovy
 
 # Procedure
 ## Common Setup

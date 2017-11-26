@@ -16,8 +16,7 @@ Table of Contents
 # Requirement
 
 1. Use groovy to add a test user in Jenkins
-2. For better security, only registered user can login
-3. For better security, Jenkins listen on port 18080, instead of 8080
+2. For better security, use groovy to only allow registered user login
 
 Quiz: 
 - Once I have enabled Jenkins security, how my chef update will work?

@@ -28,8 +28,7 @@ Table of Contents
 - Requirements:
 ```
 1. Use groovy to add a test user in Jenkins
-2. For better security, only registered user can login
-3. For better security, Jenkins listen on port 18080, instead of 8080
+2. For better security, use groovy to only allow registered user login
 ```
 - See more: [Scenario-101](./Scenario-101)
 
@@ -39,7 +38,7 @@ Table of Contents
 ```
 1. Define a Jenkins pipeline job automatically
 2. Define a Jenkins job via Jenkinsfile script automatically
-3. Use groovy to enable and configure ThinBackup plugin
+3. For automated backup, enable and configure ThinBackup plugin via Groovy
 ```
 - See more: [Scenario-102](./Scenario-102)
 
