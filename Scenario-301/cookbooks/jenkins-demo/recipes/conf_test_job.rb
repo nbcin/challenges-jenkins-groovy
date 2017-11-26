@@ -8,6 +8,16 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+# -*- encoding: utf-8 -*-
+
+#
+# Cookbook Name:: jenkins-demo
+# Recipe:: conf_test_job
+#
+# Copyright 2017, DennyZhang.com
+#
+# All rights reserved - Do Not Redistribute
+#
 
 ################################################################################
 # Install simple jobs
@@ -66,10 +76,7 @@ else
     version '12.3.0'
   end
 
-  # gem_package 'io-console' do
-  #   action :install
-  #   version '0.4.6'
-  # end
+  # TODO: better way to install io-console gem
   execute 'Install io-console' do
     command 'gem install io-console'
     action :run
@@ -97,13 +104,16 @@ end
 
 jenkins_pipeline_plugins = {
   # Install git plugin
-  'scm-api' => '2.2.5',
-  'workflow-scm-step' => '2.6',
-  'ssh-credentials' => '1.13',
   'structs' => '1.10',
+  'git-client' => '2.6.0',
+  'scm-api' => '2.2.5',
   'git' => '3.6.4',
   # Install pipeline plugin
-  'workflow-aggregator' => '2.5'
+  'workflow-support' => '2.16',
+  'cloudbees-folder' => '6.2.1',
+  'branch-api' => '2.0.15',
+  'workflow-cps' => '2.41',
+  'workflow-aggregator' => '2.5',
 }
 
 jenkins_pipeline_plugins.each do |plugin|
@@ -118,14 +128,15 @@ jenkins_command 'safe-restart' do
   action :execute
 end
 
-%w[JenkinsFileExample1 JenkinsFileExample2].each do |job_name|
-  config = File.join(Chef::Config[:file_cache_path], "#{job_name}.xml")
-  template config do
-    source "#{job_name}/config.xml"
-  end
+# TODO
+# %w[JenkinsFileExample1 JenkinsFileExample2].each do |job_name|
+#   config = File.join(Chef::Config[:file_cache_path], "#{job_name}.xml")
+#   template config do
+#     source "#{job_name}/config.xml"
+#   end
 
-  jenkins_job job_name do
-    config config
-  end
-end
-################################################################################
+#   jenkins_job job_name do
+#     config config
+#   end
+# end
+# ################################################################################
