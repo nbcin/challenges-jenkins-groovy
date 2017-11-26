@@ -96,7 +96,7 @@ package 'git' do
 end
 
 jenkins_pipeline_plugins = {
-  'Git' => '3.6.4'
+  'git' => '3.6.4'
   # ,
   # 'Pipeline' => '2.5'
 }
