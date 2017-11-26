@@ -41,7 +41,7 @@ node['jenkins_demo']['jenkins_plugins'].each do |plugin|
 end
 
 jenkins_command 'safe-restart' do
-  action :run
+  action :execute
   # need to force a restart, since we have installed critical plugins
   # action :nothing
 end

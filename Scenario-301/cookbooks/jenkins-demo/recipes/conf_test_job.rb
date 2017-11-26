@@ -114,7 +114,7 @@ jenkins_pipeline_plugins.each do |plugin|
 end
 
 jenkins_command 'safe-restart' do
-  action :run
+  action :execute
 end
 
 %w[JenkinsFileExample1 JenkinsFileExample2].each do |job_name|
