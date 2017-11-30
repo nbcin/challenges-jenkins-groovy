@@ -1,17 +1,17 @@
-[![Build Status](https://travis-ci.org/DennyZhang/jenkins-groovy-study.svg?branch=master)](https://travis-ci.org/DennyZhang/jenkins-groovy-study) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Build Status](https://travis-ci.org/DennyZhang/challenges-jenkins-groovy.svg?branch=master)](https://travis-ci.org/DennyZhang/challenges-jenkins-groovy) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
 [![LinkedIn](https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/linkedin.png)](https://www.linkedin.com/in/dennyzhang001) <a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img src="http://slack.dennyzhang.com/badge.svg" alt="slack"/></a> [![Github](https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/github.png)](https://github.com/DennyZhang)
 
-File me [tickets](https://github.com/DennyZhang/jenkins-groovy-study/issues) or star [the repo](https://github.com/DennyZhang/jenkins-groovy-study).
+File me [tickets](https://github.com/DennyZhang/challenges-jenkins-groovy/issues) or star [the repo](https://github.com/DennyZhang/challenges-jenkins-groovy).
 
 <a href="https://github.com/DennyZhang?tab=followers"><img align="right" width="200" height="183" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/fork_github.png" /></a>
 
-<a href="https://www.dennyzhang.com"><img src="https://raw.githubusercontent.com/DennyZhang/jenkins-groovy-study/master/images/groovy_icon.png"/> </a>
+<a href="https://www.dennyzhang.com"><img src="https://raw.githubusercontent.com/DennyZhang/challenges-jenkins-groovy/master/images/groovy_icon.png"/> </a>
 
 Table of Contents
 =================
 
-   * [jenkins-groovy-study](#jenkins-groovy-study)
+   * [challenges-jenkins-groovy](#challenges-jenkins-groovy)
    * [Scenarios](#scenarios)
       * [Scenario-101: Jenkins Groovy For Security I](#scenario-101-jenkins-groovy-for-security-i)
       * [Scenario-102: Jenkins Groovy For Security II](#scenario-102-jenkins-groovy-for-security-ii)
@@ -23,11 +23,11 @@ Table of Contents
    * [Contributors: Give People Credits](#contributors-give-people-credits)
    * [License](#license)
 
-**jenkins-groovy-study**: Use groovy, Jenkinsfile, Pipeline in Jenkins as a Pro.
+**challenges-jenkins-groovy**: Use groovy, Jenkinsfile, Pipeline in Jenkins as a Pro.
 
 **Related GitHub Repos**:
 - [chef-study](https://github.com/DennyZhang/chef-study): Chef Case study from dummies to pros
-- [jenkins-groovy-study](https://github.com/DennyZhang/jenkins-groovy-study): Case Study: Use groovy and Pipeline in Jenkins as a Pro
+- [challenges-jenkins-groovy](https://github.com/DennyZhang/challenges-jenkins-groovy): Case Study: Use groovy and Pipeline in Jenkins as a Pro
 - [aws-jenkins-study](https://github.com/DennyZhang/aws-jenkins-study): Case Study Using AWS To Setup Jenkins.
 
 <a href="https://www.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/dns_small.png"></a>
