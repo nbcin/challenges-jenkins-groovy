@@ -4,6 +4,8 @@
 
 File me [tickets](https://github.com/DennyZhang/challenges-jenkins-groovy/issues) or star [the repo](https://github.com/DennyZhang/challenges-jenkins-groovy).
 
+**Similar Challenges**: https://www.dennyzhang.com/battle
+
 <a href="https://github.com/DennyZhang?tab=followers"><img align="right" width="200" height="183" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/fork_github.png" /></a>
 
 <a href="https://www.dennyzhang.com"><img src="https://raw.githubusercontent.com/DennyZhang/challenges-jenkins-groovy/master/images/groovy_icon.png"/> </a>
@@ -25,10 +27,7 @@ Table of Contents
 
 **challenges-jenkins-groovy**: Use groovy, Jenkinsfile, Pipeline in Jenkins as a Pro.
 
-**Related GitHub Repos**:
-- [chef-study](https://github.com/DennyZhang/chef-study): Chef Case study from dummies to pros
-- [challenges-jenkins-groovy](https://github.com/DennyZhang/challenges-jenkins-groovy): Case Study: Use groovy and Pipeline in Jenkins as a Pro
-- [aws-jenkins-study](https://github.com/DennyZhang/aws-jenkins-study): Case Study Using AWS To Setup Jenkins.
+See more challenges from Denny: [here](https://www.dennyzhang.com/battle)
 
 <a href="https://www.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/dns_small.png"></a>
 
@@ -91,6 +90,8 @@ TODO
 ```
 - See more: [Scenario-302](./Scenario-302)
 - TODO
+
+<a href="https://www.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
 
 # Highlights
 - More Resources:
