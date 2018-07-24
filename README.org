@@ -1,0 +1,570 @@
+-*- mode:org; fill-column:70; coding:utf-8; -*-
+* org-mode configuration
+#+STARTUP: overview customtime noalign logdone hidestars
+#+SEQ_TODO: TODO HALF ASSIGN | DONE BYPASS DELEGATE CANCELED DEFERRED
+#+DRAWERS: HIDDEN CODE CONF EMAIL WEBPAGE SNIP
+#+PRIORITIES: A D C
+#+ARCHIVE: %s_done::** Finished Tasks
+#+AUTHOR: dennyzhang.com (denny@dennyzhang.com)
+#+OPTIONS: creator:nil
+#+OPTIONS: toc:3 \n:t ^:nil creator:nil d:nil
+* DONE use groovy script to create a jenkins user
+  CLOSED: [2017-11-19 Sun 22:48]
+https://gist.github.com/hayderimran7/50cb1244cc1e856873a4
+
+import jenkins.model.*
+import hudson.security.*
+
+def instance = Jenkins.getInstance()
+
+def hudsonRealm = new HudsonPrivateSecurityRealm(false)
+hudsonRealm.createAccount("MyUSERNAME","MyPASSWORD")
+instance.setSecurityRealm(hudsonRealm)
+instance.save()
+* DONE jenkins groovy hook script: https://wiki.jenkins.io/display/JENKINS/Groovy+Hook+Script
+  CLOSED: [2017-12-06 Wed 13:17]
+WEB-INF/HOOK.groovy in jenkins.war
+WEB-INF/HOOK.groovy.d/*.groovy in the lexical order in jenkins.war
+$JENKINS_HOME/HOOK.groovy
+$JENKINS_HOME/HOOK.groovy.d/*.groovy in the lexical order
+* DONE jenkins $JENKINS_HOME/init.groovy
+  CLOSED: [2017-12-06 Wed 12:28]
+https://wiki.jenkins.io/display/JENKINS/Post-initialization+script
+#+BEGIN_EXAMPLE
+Post-initialization script
+Skip to end of metadata
+Created by Kohsuke Kawaguchi, last modified by Daniel Beck on Dec 10, 2015 Go to start of metadata
+You can create a Groovy script file $JENKINS_HOME/init.groovy, or any .groovy file in the directory $JENKINS_HOME/init.groovy.d/, (See﻿ Configuring Jenkins upon start up for more info) to run some additional things right after Jenkins starts up. This script can access classes in Jenkins and all the plugins. So for example, you can write something like:
+import jenkins.model.*;
+
+// start in the state that doesn't do any build.
+Jenkins.instance.doQuietDown();
+Output is logged to the Jenkins log file. For Debian based users, this is /var/log/jenkins/jenkins.log
+
+#+END_EXAMPLE
+
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* TODO [#A] DevOps Puzzle: cancel jenkins won't kill the following process
+http://bematech-do-jenkins.carol.ai:18080/job/BackupCouchbaseDOBematech/9/
+#+BEGIN_EXAMPLE
+root@bematech-do-jenkins:/usr/sbin# ps -ef | grep cb
+root       957     1  0 May19 ?        00:00:07 rpcbind
+root      8172  8171  0 Jul15 ?        00:00:00 python /opt/devops/bin/cb_backup.py --bucket_list=mdm-session,mdm-master,mdm-staging --cbserver=http://do-cb-001.carol.ai:8091 --cbbackup_bin=/opt/couchbase/mdmpublic/couchbase-cli/bin/cbbackup --backup_dir=/opt/couchbase/backup --username Administrator --password password1234 --backup_method diff
+root     13160  8172  0 Jul15 ?        00:00:00 /bin/sh -c /opt/couchbase/mdmpublic/couchbase-cli/bin/cbbackup http://do-cb-001.carol.ai:8091 /opt/couchbase/backup/mdm-master -u Administrator -p password1234 -b mdm-master -m diff -t 4 >> /var/log/cb_backup.log
+root     13161 13160 55 Jul15 ?        1-00:24:36 python /opt/couchbase/mdmpublic/couchbase-cli/lib/python/cbbackup http://do-cb-001.carol.ai:8091 /opt/couchbase/backup/mdm-master -u Administrator -p password1234 -b mdm-master -m diff -t 4
+root     24248   421  0 21:44 pts/2    00:00:00 grep --color=auto cb
+#+END_EXAMPLE
+* TODO [#A] DevOps Puzzle: jenkins code build fail for network issue
+#+BEGIN_EXAMPLE
+jenkins APP [9:35 AM]
+----------------
+OfficialBuildMDMRepoActiveSprint - #1723 Failure after 3 min 21 sec (Open)
+Copy @bruno @denny.zhang
+
+
+Denny Zhang [9:50 AM]
+Network issue, have a retry now.
+
+```+ bower install -f -allow-root
+bower materialize#~0.95.2      resolve https://github.com/Dogfalo/materialize.git#~0.95.2
+bower font-awesome#~4.3.0      resolve https://github.com/FortAwesome/Font-Awesome.git#~4.3.0
+bower jquery#>=2.1.1           resolve https://github.com/jquery/jquery-dist.git#>=2.1.1
+bower jquery#>=2.1.1          checkout 3.1.1
+bower font-awesome#~4.3.0     checkout v4.3.0
+bower materialize#~0.95.2     checkout v0.95.3
+bower jquery#>=2.1.1          resolved https://github.com/jquery/jquery-dist.git#3.1.1
+bower font-awesome#~4.3.0     resolved https://github.com/FortAwesome/Font-Awesome.git#4.3.0
+bower materialize#~0.95.2     resolved https://github.com/Dogfalo/materialize.git#0.95.3
+bower animate.css#~3.2.5     ENOTFOUND Request to https://bower.herokuapp.com/packages/animate.css failed: getaddrinfo ENOTFOUND bower.herokuapp.com bower.herokuapp.com:443
+make: *** [all] Error 1
+```
+
+new messages
+
+jenkins APP [9:55 AM]
+----------------
+OfficialBuildMDMRepoActiveSprint - #1724 Back to normal after 3 hr 16 min (Open)
+Copy @bruno @denny.zhang
+#+END_EXAMPLE
+* TODO [#A] why Jenkins is going to shut down
+http://stackoverflow.com/questions/26218018/jenkins-is-going-to-shut-down
+
+I have a plug in "Thin backup" which was configured to shut down after back up.
+* DONE [#A] Why people need Jenkins agent                         :IMPORTANT:
+  CLOSED: [2017-11-21 Tue 11:13]
+#+BEGIN_EXAMPLE
+The Jenkins architecture is fairly straightforward. Out of the box, it’s deployed as both a server and a build agent running on the same host. You can choose to deploy Jenkins as either a server or a build agent, which allows for decoupling
+orchestration and build execution. This, in turn, allows for more architecture
+design flexibility.
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+By default, the Jenkins server will handle all HTTP requests as well as the builds for each project. As the number of users grows, or the amount or complexity of jobs increases, the master server may experience degraded performance due to a taxing of resources like CPU and memory, or due to the number of builds that are running on the master server.
+This is when build agents (or worker nodes) can benefit a Jenkins installation by freeing up resources on the master node and providing customized environments in which to test builds. A worker node contains an agent that communicates with the master server and runs a lightweight Jenkins build that allows it to receive and run offloaded jobs.
+#+END_EXAMPLE
+* DONE [#A] CentOS jenkins deployment: invalid header: folder plugin has been downgraded somehow
+  CLOSED: [2017-11-26 Sun 15:27]
+#+BEGIN_EXAMPLE
+         * jenkins_job[JenkinsFileExample1] action create
+
+           ================================================================================
+           Error executing action `create` on resource 'jenkins_job[JenkinsFileExample1]'
+           ================================================================================
+
+           Zlib::DataError
+           ---------------
+           incorrect header check
+
+           Cookbook Trace:
+           ---------------
+           /var/chef/cache/cookbooks/jenkins/libraries/_helper.rb:428:in `block in wait_until_ready!'
+           /var/chef/cache/cookbooks/jenkins/libraries/_helper.rb:426:in `wait_until_ready!'
+           /var/chef/cache/cookbooks/jenkins/libraries/_helper.rb:61:in `executor'
+           /var/chef/cache/cookbooks/jenkins/libraries/job.rb:279:in `current_job'
+           /var/chef/cache/cookbooks/jenkins/libraries/job.rb:104:in `load_current_resource'
+
+           Resource Declaration:
+           ---------------------
+           # In /var/chef/cache/cookbooks/jenkins-demo/recipes/conf_test_job.rb
+
+           138:   jenkins_job job_name do
+           139:     config config
+           140:   end
+           141: end
+
+           Compiled Resource:
+           ------------------
+           # Declared in /var/chef/cache/cookbooks/jenkins-demo/recipes/conf_test_job.rb:138:in `block in from_file'
+
+           jenkins_job("JenkinsFileExample1") do
+             action [:create]
+             default_guard_interpreter :default
+             declared_type :jenkins_job
+             cookbook_name "jenkins-demo"
+             recipe_name "conf_test_job"
+#+END_EXAMPLE
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* DONE Restore jenkins from ThinBackup doesn't work: don't enable Restore next build number file (if found in backup)
+  CLOSED: [2017-04-12 Wed 16:49]
+https://www.mail-archive.com/jenkinsci-issues@googlegroups.com/msg37769.html
+
+Apr 12, 2017 9:41:40 PM org.jvnet.hudson.plugins.thinbackup.ThinBackupMgmtLink doRestore
+INFO: Starting restore operation.
+Apr 12, 2017 9:41:41 PM org.jvnet.hudson.plugins.thinbackup.ThinBackupMgmtLink doRestore
+SEVERE: Could not restore. Aborting.
+* DONE monitor folder size: create hourly jenkins job to run the check test
+  CLOSED: [2017-07-27 Thu 11:37]
+https://exchange.nagios.org/directory/Plugins/Operating-Systems/Linux/CheckDirSize/details
+
+https://exchange.nagios.org/directory/Plugins/System-Metrics/File-System/check-folder-size-(linux-nrpe)/details
+https://support.nagios.com/forum/viewtopic.php?t=37614&p=176512
+https://serverfault.com/questions/105448/best-method-to-track-folder-size-growth-over-time
+
+> /tmp/check_disk_size.sh && vim /tmp/check_disk_size.sh
+bash /tmp/check_disk_size.sh -d /data/staging/ -c 62914560 -w 31457280
+
+#+BEGIN_EXAMPLE
+root@prod-app-01:/tmp# bash /tmp/check_disk_size.sh -d /data/staging/ -c 62914560 -w 31457280
+51332968 KB - warning
+root@prod-app-01:/tmp# bash /tmp/check_disk_size.sh -d /data/staging/ -c 62914560 -w 31457280
+Error: No such file or directory 51329724 /data/staging/
+
+root@prod-app-01:/tmp# du -h -d 1 /data/staging/
+116M    /data/staging/productusage1
+692K    /data/staging/todimo
+du: cannot access ‘/data/staging/8e2d11502c5511e79481a2f42be00f79_4da936a0715a11e795364a8136534b63_pfunc_other_9186140389025741_6180.json’: No such file or directory
+49G     /data/staging/
+root@prod-app-01:/tmp# echo $?
+1
+#+END_EXAMPLE
+* DONE jenkins how to use credential paramter
+  CLOSED: [2018-03-26 Mon 22:48]
+https://emilwypych.com/2017/07/14/use-credentials-jenkins-projects/
+https://www.tikalk.com/posts/2017/03/07/how-to-mask-credentials-in-your-jenkins-jobs/
+http://steve-jansen.github.io/blog/2014/12/16/parsing-jenkins-secrets-in-a-shell-script/
+https://support.cloudbees.com/hc/en-us/articles/203802500-Injecting-Secrets-into-Jenkins-Build-Jobs
+
+* DONE get jenkins plugin version from hpi: cat /var/lib/jenkins/plugins/workflow-job/META-INF/MANIFEST.MF
+  CLOSED: [2017-11-25 Sat 23:58]
+#+BEGIN_EXAMPLE
+[root@jenkins-demo workflow-job]# cat /var/lib/jenkins/plugins/workflow-job/META-INF/MANIFEST.MF
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: jglick
+Build-Jdk: 1.8.0_101
+Extension-Name: workflow-job
+Specification-Title: The Jenkins Plugins Parent POM Project
+Implementation-Title: workflow-job
+Implementation-Version: 2.9
+Group-Id: org.jenkins-ci.plugins.workflow
+Short-Name: workflow-job
+Long-Name: Pipeline: Job
+Url: https://wiki.jenkins-ci.org/display/JENKINS/Pipeline+Job+Plugin
+Plugin-Version: 2.9
+Hudson-Version: 1.642.3
+Jenkins-Version: 1.642.3
+Plugin-Dependencies: workflow-support:2.2
+Plugin-Developers:
+#+END_EXAMPLE
+* DONE jenkins weight plugin
+  CLOSED: [2018-04-22 Sun 07:35]
+Bruno Volpato [1:41 PM]
+@denny.zhang you could install the weight plugin, and define the build as weight 2
+so no 2 builds will be able to run at the same time
+
+Heavy Job
+This plugin allows you to define "weight" on each job, and making each job consume that many executors (instead of just one.) Useful for a job that's parallelized by itself, so that Hudson can schedule jobs accordingly.
+
+Denny Zhang (DevOps) [1:42 PM]
+Cool. I didn’t notice that plugin.
+
+Let me give it a try
+
+* TODO jenkins CLI protocol: [ssh|http|remoting]
+/Users/mac/Dropbox/private_data/project/devops_consultant/consultant_code/github/aws/jenkins/attributes/executor.rb
+
+* DONE [[https://trello.com/c/3p1zkszz][1516]] Automate docker images build verification: http://injenkins.fluigdata.com:48080/job/BuidAllDockerImages/21/console
+  CLOSED: [2016-12-02 Fri 08:27]
+Currently we leverage  a couple of self-created docker images for daily CI.
+
+https://github.com/TOTVS/mdmdevops/wiki/customized-docker-images
+
+A successful docker image build depends on multiple moving parts. It's better we define a weekly jenkins job and automate the image build verification.
+
+docker stop my-test; docker rm my-test
+docker run -t -d --privileged -h mytest --name my-test totvslabs/docker:v1.0 /bin/bash
+docker exec -it my-test bash
+
+docker stop my-test; docker rm my-test
+docker run -t -d -h mytest --name my-test totvslabs/docker:v1.0 /bin/bash
+docker exec -it my-test bash
+
+/bin/sh -c '(service docker start || true) &&   sleep 5 && docker pull ubuntu:14.04'
+
+docker stop my-test; docker rm my-test
+docker run -t -d --privileged -h mytest --name my-test ubuntu:14.04 /bin/bash
+docker exec -it my-test bash
+
+docker rmi totvslabs/docker:v1.0
+
+cd /root/
+git clone https://github.com/TOTVS/mdmpublic.git
+cd /root/mdmpublic/docker/Dockerfile
+make test
+** add resource file
+mkdir -p /root/docker_in_docker/resources
+
+cd  /root/docker_in_docker/resources
+vim jenkins_credential
+vim github_id_rsa
+** save docker golden image
+mkdir -p /root/docker_in_docker
+docker save ubuntu:14.04 > /root/docker_in_docker/ubuntu_14.04.tar.gz
+ls -lth /root/docker_in_docker/ubuntu_14.04.tar.gz
+** start docker container for dind
+docker stop docker-images; docker rm docker-images
+docker run -t -d --privileged -h mytest --name docker-images  -v /root/docker_in_docker:/root/docker_in_docker totvslabs/docker:v1.0 /usr/bin/dockerd
+docker exec -it docker-images bash
+** load docker image
+docker load -i /root/docker_in_docker/ubuntu_14.04.tar.gz
+** run docker image build test
+cd /root/
+git clone https://github.com/TOTVS/mdmpublic.git
+cd /root/mdmpublic/docker/Dockerfile
+** copy resource
+cp -r /root/docker_in_docker/resources/* /root/mdmpublic/docker/Dockerfile/resources/
+** DONE dockerfile build with name convention
+   CLOSED: [2016-11-25 Fri 18:06]
+** DONE build images
+   CLOSED: [2016-11-25 Fri 21:17]
+cd /root/mdmpublic/docker/Dockerfile
+
+git pull
+
+make test
+** #  --8<-------------------------- separator ------------------------>8--
+** CANCELED intelligent build: only build images for which dockerfile has been changed
+   CLOSED: [2016-11-25 Fri 21:37]
+** CANCELED make one given docker file
+   CLOSED: [2016-11-25 Fri 21:37]
+Dockerfile_chef_v1_0
+** DONE wrap a jenkins job: http://injenkins.fluigdata.com:48080/job/BuidAllDockerImages/13/console
+   CLOSED: [2016-11-29 Tue 14:01]
+2016-11-25 13:13:13 + echo 'Build docker images'
+2016-11-25 13:13:13 Build docker images
+2016-11-25 13:13:13 + ssh -p 2702 root@172.17.0.1 'docker exec -t docker-images cd /mdmpublic/docker/Dockerfile && python ./build_image_all.py --docker_file java_v1_0.dockerfile'
+2016-11-25 13:13:13 rpc error: code = 13 desc = invalid header field value "oci runtime error: exec failed: container_linux.go:247: starting container process caused \"exec: \\\"cd\\\": executable file not found in $PATH\"\n"
+2016-11-25 13:13:13 Build step 'Execute shell' marked build as failure
+** DONE trap exit: support test a list of docker
+   CLOSED: [2016-11-29 Tue 16:54]
+** #  --8<-------------------------- separator ------------------------>8--
+** CANCELED Downloaded newer image for ubuntu:14.04
+   CLOSED: [2016-11-29 Tue 16:59]
+** DONE start only if container doesn't exist
+   CLOSED: [2016-11-29 Tue 17:23]
+** TODO docker cp fail
+* TODO pipeline fail to stop: http://bematech-do-jenkins.carol.ai:18080/view/Maintanence/job/PiepeLineFixScale/3/console
+#+BEGIN_EXAMPLE
+Started by user DennyZhang
+[Pipeline] stage
+[Pipeline] { (FixConf)
+Aborted by DennyZhang
+Click here to forcibly terminate running steps
+Terminating stage
+Click here to forcibly kill entire build
+Aborted by DennyZhang
+Click here to forcibly terminate running steps
+Aborted by DennyZhang
+Click here to forcibly terminate running steps
+Aborted by DennyZhang
+Click here to forcibly terminate running steps
+Terminating stage
+Click here to forcibly kill entire build
+Terminating stage
+Click here to forcibly kill entire build
+
+#+END_EXAMPLE
+
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* TODO Security: docker jenkins ssh key is a security hole; so we have to recreate key file each time we start?
+search work.org: ssh passwordless login from jenkins container to docker daemon
+* CANCELED jenkins authentication issue
+  CLOSED: [2017-11-27 Mon 01:17]
+#+BEGIN_EXAMPLE
+Nov 26, 2017 7:40:39 AM org.jenkinsci.main.modules.cli.auth.ssh.SshCliAuthenticator authenticate
+WARNING: CLI authentication failure
+java.io.EOFException
+	at java.io.DataInputStream.readUnsignedShort(DataInputStream.java:340)
+	at java.io.DataInputStream.readUTF(DataInputStream.java:589)
+	at java.io.DataInputStream.readUTF(DataInputStream.java:564)
+	at hudson.cli.Connection.readUTF(Connection.java:90)
+	at hudson.cli.Connection.verifyIdentity(Connection.java:250)
+	at org.jenkinsci.main.modules.cli.auth.ssh.SshCliAuthenticator.authenticate(SshCliAuthenticator.java:39)
+	at hudson.cli.CliManagerImpl$2.run(CliManagerImpl.java:112)
+#+END_EXAMPLE
+* AWS CodeBuild: Just like my jenkins job of buildCodeProject
+https://aws.amazon.com/codebuild/pricing/
+Build Duration is calculated in minutes, from the time you submit your build until your build is terminated, rounded up to the nearest minute.
+* DONE Configure Jenkins: people can trigger jobs, but can't configure job
+  CLOSED: [2015-06-02 Tue 01:37]
+Jenkins's own user database
+- Create a predefined admin
+
+Don't allow users to sign up.
+
+Matrix-based security
+
+Anonymous: Overall(Read, RunScripts), Jobs(Build, Cancel, Read, Workspace)
+* DONE linux enable user to login: usermod -s /bin/bash jenkins
+  CLOSED: [2014-09-24 Wed 23:04]
+http://superuser.com/questions/546761/how-do-i-start-in-bash-when-sshing-into-my-server
+* DONE [#A] prod jenkins run out of disk: /data is still rootfs, just /data/backup and /data/backup2 are mounted volumes
+  CLOSED: [2018-02-17 Sat 13:13]
+#+BEGIN_EXAMPLE
+root@bematech-do-jenkins:/# du -h -d 1 /
+12K     /tmp
+5.4T    /data
+0       /sys
+354M    /lib
+512K    /run
+9.6M    /bin
+4.0K    /mnt
+12G     /var
+48M     /boot
+4.0K    /dev
+9.5M    /sbin
+8.0K    /home
+16K     /lost+found
+72M     /root
+4.0K    /srv
+208M    /opt
+1.8G    /usr
+4.0K    /lib64
+4.0K    /coredump
+9.6M    /etc
+du: cannot access ‘/proc/9080/task/9080/fd/4’: No such file or directory
+du: cannot access ‘/proc/9080/task/9080/fdinfo/4’: No such file or directory
+du: cannot access ‘/proc/9080/fd/3’: No such file or directory
+du: cannot access ‘/proc/9080/fdinfo/3’: No such file or directory
+0       /proc
+8.0K    /media
+5.4T    /
+
+root@bematech-do-jenkins:/# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            3.9G  4.0K  3.9G   1% /dev
+tmpfs           799M  516K  798M   1% /run
+/dev/vda1        79G   74G  1.4G  99% /
+none            4.0K     0  4.0K   0% /sys/fs/cgroup
+none            5.0M     0  5.0M   0% /run/lock
+none            3.9G  3.2M  3.9G   1% /run/shm
+none            100M     0  100M   0% /run/user
+/dev/sdb        7.8T  4.0T  3.4T  55% /data/backup
+/dev/sda        7.8T  1.4T  6.1T  18% /data/backup2
+none             79G   74G  1.4G  99% /var/lib/docker/aufs/mnt/6721386a0c5decabe2bf09958902209f7f5f30ce58371f8e1d9bc000de0d316d
+shm              64M     0   64M   0% /var/lib/docker/containers/84da92e14cc8842e9d30eef9f383b238278849b94f4dbd420049feb4cfd08710/shm
+none             79G   74G  1.4G  99% /var/lib/docker/aufs/mnt/1725381ca405857947c4f018c3208e5f31dd7e2f605f349ab80fd17dd266aab9
+shm              64M     0   64M   0% /var/lib/docker/containers/98f33c7885ea9646a4b8d67116d50d08519fc48291eb960e386e5f81c4434b31/shm
+#+END_EXAMPLE
+* TODO [#A] fail to attach docker container(docker-jenkins)
+#+BEGIN_EXAMPLE
+root@oregon:~# ps -ef | grep docker
+root     10135 14286  0 06:14 ?        00:00:00 docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 33348 -container-ip 172.17.0.4 -container-port 22
+root     11192 10965  0  2015 pts/49   00:00:27 docker exec -it docker-jenkins bash
+root     12271 19396  0 06:19 pts/50   00:00:00 grep --color=auto docker
+root     14286     1  0  2015 ?        00:27:05 /usr/bin/docker daemon --tlsverify --tlscacert=/home/denny/docker/ca.pem --tlscert=/home/denny/docker/server-cert.pem --tlskey=/home/denny/docker/server-key.pem -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock
+root     14403 14286  0  2015 ?        00:02:03 docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 48080 -container-ip 172.17.0.2 -container-port 18080
+root     14418 14286  0  2015 ?        00:01:57 docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 18000 -container-ip 172.17.0.2 -container-port 18000
+root     14425 14286  0  2015 ?        00:01:55 docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 4022 -container-ip 172.17.0.2 -container-port 22
+root     19842 19656  0  2015 pts/30   00:01:33 docker exec -it docker-jenkins bash
+root     28063 27736  0  2015 pts/52   00:00:22 docker exec -it docker-jenkins bash
+root     29843 29667  0  2015 pts/14   00:01:48 docker exec -it docker-jenkins bash
+root     32745 32358  0  2015 pts/35   00:00:38 docker exec -it docker-jenkins bash
+root     32755 32570  0  2015 pts/45   00:00:19 docker exec -it docker-jenkins bash
+root@oregon:~# strace -p 32755
+Process 32755 attached - interrupt to quit
+read(0, ^C <unfinished ...>
+Process 32755 detached
+#+END_EXAMPLE
+* [#B] Bug怎么与jenkins联动
+#+begin_example
+    二、Zoho的去留问题
+
+    上周我们集体抱怨了zoho的各种问题。主要问题集中在：
+
+    1. zoho 的 stream 不好用
+    2. zoho 的 bug 没有类似 bugid 的概念，不易于和 jenkins 配合。
+
+    我提议，我们讨论下类似 teamtoy 之类的工具来记录大家的一些思维流（并整合进 irc 做提醒）。再者，
+    我们可以使用类似 bugzilla 的工具来管理我们的 BP 和 Bug，做到 Bug 和 Jenkins 的互动。jenkins有
+    提交就回馈到 bug 系统里面，任何一个bp或者bug以bug系统里面的 bug 流为线索进行跟踪。
+
+    希望达成结论：ZOHO怎么用？；BP 在哪里做？；BUG 在哪里做？；如何互动？
+#+end_example
+
+* [#A] web page: Triggering a Jenkins build from a push to Github – Marc Best – Medium          
+https://medium.com/@marc_best/trigger-a-jenkins-build-from-a-github-push-b922468ef1ae
+** webcontent                     :noexport:
+#+begin_example
+Location: https://medium.com/@marc_best/trigger-a-jenkins-build-from-a-github-push-b922468ef1ae                                                      
+Homepage
+About membership
+Sign inGet started
+Homepage
+Go to the profile of Marc Best
+Marc BestBlockedUnblockFollowFollowing
+Software/DevOps Engineer
+Apr 14, 2017
+---------------------------------------------------------------------------------------------------
+
+Triggering a Jenkins build from a push to Github
+
+In this article we will look at setting up the basis for Continuous Integration using Jenkins for
+orchestration and Github for source control. We will be configuring a Jenkins build to be initiated
+on a push to a repository.
+
+1. Install Github Integration Plugin
+
+First we need to install the GitHub Integration Plugin, this will give us the ability to configure
+Jenkins to use our Github repository.
+
+[1]
+Installing Github integration plugin
+
+2. Prepare Github repository
+
+We need to add a service to call the Jenkins Github webhook on a push, to do this go to settings ->
+integrations & Services and add a new service. The Jenkins Github plugin service should be in the
+list of available services.
+
+[1]
+
+Enter the URL of your Jenkins instance followed by /github-webhook/
+
+[1]
+
+3. Giving the Jenkins user access to the Github repository
+
+We need to give the Jenkins user access to our repository by adding a deploy key in the Github
+settings.
+
+The first step is generating SSH keys for the Jenkins user if they do not already exist.
+
+jenkins@ip:/home/ubuntu$ ssh-keygen
+
+Depending on where the key was created, you need to copy the public key so that it can be added to
+Github
+
+jenkins@ip:/home/ubuntu$ cat /var/lib/jenkins/.ssh/id_rsa.pub
+
+Add the key copied in the previous step to Github. To do this head to the repository settings ->
+Deploy keys
+
+[1]
+
+The last step is to check that everything is working as expected, as the Jenkins user in your
+console enter the below to check the connection to Github.
+
+jenkins@ip:~/.ssh$ ssh git@github.com
+
+If successful you should see the following message
+
+Warning: Permanently added the RSA host key for IP address '{YOUR_SERVER_IP}' to the list of known hosts.
+
+PTY allocation request failed on channel 0
+
+Hi marcbest/medium-jenkins-git-tut! You've successfully authenticated, but GitHub does not provide shell access.
+
+Connection to github.com closed.
+
+4. Update Jenkins job with Github configuration
+
+In the ‘General’ section of the job configuration check the Github project tick box and enter the
+URL to the repository that you configured in step 2.
+
+[1]
+
+Next update the Source Code Management section, first set the repository URL (note the format
+git@github.com:{YOUR_REPO}. You can also specify the branch you would like to use.
+
+[1]
+
+The last step is to tell Jenkins to build when the Github hook is called, select the highlighted
+option below in the Build Triggers section.
+
+[1]
+
+That’s it! Your Jenkins build should now be triggered whenever a push is made to your repository.
+
+  * Jenkins
+  * Continuous Integration
+  * Ci
+  * DevOps
+  * Github
+
+One clap, two clap, three clap, forty?
+
+By clapping more or less, you can signal to us which stories really stand out.
+
+260
+4
+BlockedUnblockFollowFollowing
+Go to the profile of Marc Best
+
+Marc Best
+
+Software/DevOps Engineer
+
+  * 
+    260
+  * 
+  * 
+  * 
+
+Go to the profile of Marc Best
+Never miss a story from Marc Best, when you sign up for Medium. Learn more
+Never miss a story from Marc Best
+BlockedUnblockFollowGet updates
+
+#+end_example
